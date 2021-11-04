@@ -31,7 +31,7 @@ app.post('/submit', async (req, res) => {
         `"${req.body.message}"`,
         `"${time}"`
     ];
-    
+    if (data.some(item => item === undefined)) return;
     const time = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
     
 
