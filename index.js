@@ -24,7 +24,7 @@ app.post('/submit', async (req, res) => {
     console.log(
         req.body
     );
-
+    const time = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
     const data = [
         `"${req.body.name}"`,
         `"${req.body.email}"`,
@@ -32,7 +32,6 @@ app.post('/submit', async (req, res) => {
         `"${time}"`
     ];
     if (data.some(item => item === undefined)) return;
-    const time = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
     
 
     // append the data to the csv file
