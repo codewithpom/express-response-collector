@@ -3,6 +3,7 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const mailer = require('./send_email'); 
 const PORT = process.env.PORT || 3000;
 // add body parser
 const bodyParser = require('body-parser');
@@ -25,12 +26,15 @@ app.post('/submit', async (req, res) => {
         `"${req.body.message}"`,
         `"${time}"`
     ];
+    res.send('Thank you for your response!');
+
     // append the data to the csv file
     fs.appendFile('response.csv', data.join(',') + '\n', (err) => {
         if (err) throw err;
         console.log('The "data to append" was appended to file!');
     });
-    res.send('Thank you for your response!');
+    mailer.send_mail(req.body.email, "Thanks For Response", "Thanks for sending us a response we will be with you shortly.")
+
 });
 
 // start the server on port 3000
