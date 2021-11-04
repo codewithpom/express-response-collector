@@ -3,6 +3,7 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const PORT = 3000 || process.env.PORT;
 // add body parser
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -33,7 +34,7 @@ app.post('/submit', async (req, res) => {
 });
 
 // start the server on port 3000
-app.listen(3000, () => {
-    console.log('Server started on port 3000');
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
 });
 
