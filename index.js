@@ -1,5 +1,9 @@
 // Here we will create an express app to collect responses from a response and save them in a csv file using the csv-append module
 
+
+// Disable console.log for production
+if (process.env.NODE_ENV === "production") console.log = function (){}
+
 const express = require('express');
 const app = express();
 const fs = require('fs');
@@ -16,17 +20,20 @@ app.get('/', (req, res) => {
 
 // create a post route to collect the responses at /submit in the response.csv file with time according to India's timezone in formatted date and time
 app.post('/submit', async (req, res) => {
-    const time = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+    res.send('Thank you for your response!');
     console.log(
         req.body
     );
+
     const data = [
         `"${req.body.name}"`,
         `"${req.body.email}"`,
         `"${req.body.message}"`,
         `"${time}"`
     ];
-    res.send('Thank you for your response!');
+    
+    const time = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+    
 
     // append the data to the csv file
     fs.appendFile('response.csv', data.join(',') + '\n', (err) => {
