@@ -8,7 +8,9 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/pages/index.html');
+});
 
 // create a post route to collect the responses at /submit in the response.csv file with time according to India's timezone in formatted date and time
 app.post('/submit', async (req, res) => {
